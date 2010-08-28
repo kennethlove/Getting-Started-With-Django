@@ -1,0 +1,22 @@
+{% extends "blog/post_archive.html" %}
+
+{% block page_title %}
+{{ object.title }} | {{ object.blog.name }} {{ block.super }}
+{% endblock %}
+
+{% block header %}
+<h1>{{ object.title }}</h1>
+{% endblock %}
+
+{% block main %}
+{{ object.body|linebreaks }}
+<aside>
+	{{ object.publish_at }}
+	<ul>
+		{% for tag in object.tags.all %}
+		<li>{{ tag }}</li>
+		{% endfor %}
+	</ul>
+	<a href="{{ object.blog.get_absolute_url }}">Back to post list</a>
+</aside>
+{% endblock %}

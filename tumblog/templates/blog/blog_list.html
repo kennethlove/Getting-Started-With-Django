@@ -1,0 +1,19 @@
+{% extends 'layouts/site_base.html' %}
+
+{% block page_title %}Pick a blog! | {{ block.super }}{% endblock %}
+
+{% block header %}
+<h1>Select a blog below to view its posts.</h1>
+{% endblock %}
+
+{% block main %}
+{% if object_list %}
+	<ul>
+		{% for blog in object_list %}
+		<li>
+		<a href="{{ blog.get_absolute_url }}">{{ blog }}</a>
+		</li>
+		{% endfor %}
+	</ul>
+{% endif %}
+{% endblock %}

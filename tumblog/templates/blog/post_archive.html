@@ -1,0 +1,40 @@
+{% extends "layouts/site_base.html" %}
+
+{% block page_title %}{{ blog.name }} | {{ block.super }}{% endblock %}
+
+{% block header %}
+<h1>{{ blog.name }}</h1>
+{% endblock %}
+
+{% block main %}
+{{ blog.description|linebreaks }}
+<section>
+	<h2>Recent Posts</h2>
+	{% if latest|length %}
+	<p>Showing {{ latest|length }} posts of {{ blog.posts.get_visible|length }} total.</p>
+	<ul>
+		{% for post in latest %}
+		<li>
+			<h3><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
+			{{ post.publish_at|date }}
+			{{ post.excerpt|linebreaks }}
+		</li>
+		{% endfor %}
+	</ul>
+	<aside>
+		<ol>
+			{% for year in date_list %}
+				<li><a href="{% url year blog.slug year|date:"Y" %}">{{ year|date:"Y" }}</a></li>
+			{% endfor %}
+		</ol>
+	</aside>
+	{% else %}
+	<p>Sorry, no posts yet. Check back soon.</p>
+	{% endif %}
+</section>
+<a href="{% url home %}">Back to blog list</a>
+{% endblock %}
+
+{% block footer %}
+<p>All contents &copy; 2010 {{ object.user }}</p>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "layouts/site_base.html" %}
+
+{% block page_title %}{{ blog.name }} | {{ block.super }}{% endblock %}
+
+{% block header %}
+<h1>{{ blog.name }}</h1>
+{% endblock %}
+
+{% block main %}
+{{ blog.description|linebreaks }}
+<section>
+	<h2>Posts for {{ month }}</h2>
+	<ul>
+		{% for post in object_list %}
+		<li>
+			<h3><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
+			{{ post.publish_at|date }}
+			{{ post.excerpt|linebreaks }}
+		</li>
+		{% endfor %}
+	</ul>
+	<aside>
+		<a href="{% url month blog.slug month|date:"Y" month|date:"m" %}">{{ previous_month|date:"M" }}</a>
+		<a href="{% url month blog.slug month|date:"Y" month|date:"m" %}">{{ next_month|date:"M" }}</a>
+	</aside>
+</section>
+<a href="{{ blog.get_absolute_url }}">Back to post list</a>
+{% endblock %}
+
+{% block footer %}
+<p>All contents &copy; 2010 {{ object.user }}</p>
+{% endblock %}
