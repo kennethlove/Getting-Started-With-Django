@@ -16,8 +16,8 @@ urlpatterns = patterns('',
     # (r'^tumblog/', include('tumblog.foo.urls')),
     url(r'^$', list_detail.object_list, blog_info, name="home"),
     url(r'^blog/(?P<slug>[-\w]+)/$', 'blog.views.blog', name="blog"),
-    url(r'^blog/(?P<slug>[-\w]+)/(?P<y>\d{4})/$', 'blog.views.archive_year', name="year"),
-    url(r'^blog/(?P<slug>[-\w]+)/(?P<y>\d{4})/(?P<m>\d{2})/$', 'blog.views.archive_month', name="month"),
+    url(r'^blog/(?P<slug>[-\w]+)/(?P<y>\d{4})/$', 'blog.views.year', name="year"),
+    url(r'^blog/(?P<slug>[-\w]+)/(?P<y>\d{4})/(?P<m>\d{2})/$', 'blog.views.month', name="month"),
 
     url(r'^blog/(?P<blog>[-\w]+)/post/(?P<slug>[-\w]+)/$', 'blog.views.post', name="post"),
 

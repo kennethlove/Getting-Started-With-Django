@@ -9,7 +9,7 @@
 {% block main %}
 {{ blog.description|linebreaks }}
 <section>
-	<h2>Posts for {{ month }}</h2>
+	<h2>Posts for {{ month|date:"N, Y" }}</h2>
 	<ul>
 		{% for post in object_list %}
 		<li>
@@ -20,8 +20,12 @@
 		{% endfor %}
 	</ul>
 	<aside>
-		<a href="{% url month blog.slug month|date:"Y" month|date:"m" %}">{{ previous_month|date:"M" }}</a>
-		<a href="{% url month blog.slug month|date:"Y" month|date:"m" %}">{{ next_month|date:"M" }}</a>
+		<a href="{% url month blog.slug previous_month|date:"Y" previous_month|date:"m" %}">
+			{{ previous_month|date:"N" }}</a>
+		{% if next_month %}
+		<a href="{% url month blog.slug next_month|date:"Y" next_month|date:"m" %}">
+			{{ next_month|date:"N" }}</a>
+		{% endif %}
 	</aside>
 </section>
 <a href="{{ blog.get_absolute_url }}">Back to post list</a>

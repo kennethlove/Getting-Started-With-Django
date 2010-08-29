@@ -22,7 +22,9 @@
 	<aside>
 		<ol>
 			{% for month in date_list %}
-				<li><a href="{% url month blog.slug year month|date:"m" %}">{{ month|date:"M" }}</a></li>
+			<li>
+				<a href="{% url month blog.slug month|date:"Y" month|date:"m" %}">{{ month|date:"N" }}</a>
+			</li>
 			{% endfor %}
 		</ol>
 	</aside>

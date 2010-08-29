@@ -19,4 +19,14 @@
 	</ul>
 	<a href="{{ object.blog.get_absolute_url }}">Back to post list</a>
 </aside>
+<aside>
+	{% if object.get_previous_by_publish_at %}
+	<a href="{{ object.get_previous_by_publish_at.get_absolute_url }}">
+		{{ object.get_previous_by_publish_at }}</a>
+	{% endif %}
+	{% if object.get_next_by_publish_at %}
+	<a href="{{ object.get_next_by_publish_at.get_absolute_url }}">
+		{{ object.get_next_by_publish_at }}</a>
+	{% endif %}
+</aside>
 {% endblock %}
