@@ -19,18 +19,18 @@
 		</li>
 		{% endfor %}
 	</ul>
-	<aside>
+	<nav>
 		<a href="{% url month blog.slug previous_month|date:"Y" previous_month|date:"m" %}">
 			{{ previous_month|date:"N" }}</a>
 		{% if next_month %}
 		<a href="{% url month blog.slug next_month|date:"Y" next_month|date:"m" %}">
 			{{ next_month|date:"N" }}</a>
 		{% endif %}
-	</aside>
+	</nav>
 </section>
 <a href="{{ blog.get_absolute_url }}">Back to post list</a>
 {% endblock %}
 
 {% block footer %}
-<p>All contents &copy; 2010 {{ object.user }}</p>
+<p>All contents &copy; 2010 {{ blog.user }}</p>
 {% endblock %}

@@ -1,3 +1,4 @@
 *.pyc
 db/
 tut_venv/
+.DS_Store

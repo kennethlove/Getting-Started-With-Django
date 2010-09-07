@@ -21,13 +21,13 @@
 		</li>
 		{% endfor %}
 	</ul>
-	<aside>
+	<nav>
 		<ol>
 			{% for year in date_list %}
 				<li><a href="{% url year blog.slug year|date:"Y" %}">{{ year|date:"Y" }}</a></li>
 			{% endfor %}
 		</ol>
-	</aside>
+	</nav>
 	{% else %}
 	<p>Sorry, no posts yet. Check back soon.</p>
 	{% endif %}
@@ -36,5 +36,5 @@
 {% endblock %}
 
 {% block footer %}
-<p>All contents &copy; 2010 {{ object.user }}</p>
+<p>All contents &copy; 2010 {{ blog.user }}</p>
 {% endblock %}

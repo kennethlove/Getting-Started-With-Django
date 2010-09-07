@@ -82,6 +82,15 @@ class Post(TimeStampedActivate):
     def __unicode__(self):
         return self.title
 
+    def is_visible(self):
+        """
+        Checks to see if a post is supposed be visible when accessed outside
+        of a queryset.
+        """
+        if self.active and self.publish_at <= datetime.datetime.now():
+            return True
+        return False
+
     @models.permalink
     def get_absolute_url(self):
         return ('post', (), {

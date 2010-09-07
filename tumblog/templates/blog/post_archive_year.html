@@ -19,7 +19,7 @@
 		</li>
 		{% endfor %}
 	</ul>
-	<aside>
+	<nav>
 		<ol>
 			{% for month in date_list %}
 			<li>
@@ -27,11 +27,11 @@
 			</li>
 			{% endfor %}
 		</ol>
-	</aside>
+	</nav>
 </section>
 <a href="{{ blog.get_absolute_url }}">Back to post list</a>
 {% endblock %}
 
 {% block footer %}
-<p>All contents &copy; 2010 {{ object.user }}</p>
+<p>All contents &copy; 2010 {{ blog.user }}</p>
 {% endblock %}
