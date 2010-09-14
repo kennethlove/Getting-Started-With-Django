@@ -73,8 +73,50 @@ button {  width: auto; overflow: visible; }
 
 
  /* Primary Styles
-    Author: 
+    Author: Kenneth Love
  */
+
+header {
+  background:lightblue;
+  margin-bottom:10px;
+  padding:5px 10px 0;
+  -webkit-box-shadow:0 2px 5px #999;
+}
+  header h1 {
+    font:28px/1.5 Helvetica, Arial, sans-serif;
+    padding-bottom:5px;
+  }
+  header p {
+    font-style:italic;
+    padding-bottom:5px;
+  }
+
+#main {
+  margin-left:10px;
+}
+  #main article {
+    padding:0 10px;
+  }
+    #main aside {
+      background-color:beige;
+      float:right;
+      padding:10px;
+      -webkit-box-shadow:2px 2px 5px #999;
+    }
+      ol.dates { list-style:none;margin-left:0; }
+  #main nav {
+    clear:both;
+    font-size:10px;
+    margin-top:10px;
+    text-align:center;
+  }
+
+footer {
+  font-size:10px;
+  margin:10px;
+  text-align:center;
+  text-transform:uppercase;
+}
 
 
 

@@ -5,20 +5,22 @@
 {% endblock %}
 
 {% block header %}
-<h1>{{ object.title }}</h1>
+<h1>{{ object.blog.name }}</h1>
 {% endblock %}
 
 {% block main %}
-{{ object.body|linebreaks }}
-<aside>
-	{{ object.publish_at }}
-	<ul>
-		{% for tag in object.tags.all %}
-		<li>{{ tag }}</li>
-		{% endfor %}
-	</ul>
-	<a href="{{ object.blog.get_absolute_url }}">Back to post list</a>
-</aside>
+<article>
+	<aside>
+		{{ object.publish_at }}
+		<ul>
+			{% for tag in object.tags.all %}
+			<li>{{ tag }}</li>
+			{% endfor %}
+		</ul>
+	</aside>
+	<h1>{{ object.title }}</h1>
+	{{ object.body|linebreaks }}
+</article>
 <nav>
 	{% with object.get_previous_by_publish_at as prev %}
 		{% if prev and prev.is_visible %}
@@ -26,6 +28,8 @@
 			&lt; {{ prev }}</a>
 		{% endif %}
 	{% endwith %}
+	<a href="{{ object.blog.get_absolute_url }}">Back to post 
+		list</a>
 	{% with object.get_next_by_publish_at as next %}
 		{% if next and next.is_visible %}
 		<a href="{{ next.get_absolute_url }}">

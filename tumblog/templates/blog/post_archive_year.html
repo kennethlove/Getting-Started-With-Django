@@ -4,11 +4,20 @@
 
 {% block header %}
 <h1>{{ blog.name }}</h1>
+{{ blog.description|linebreaks }}
 {% endblock %}
 
 {% block main %}
-{{ blog.description|linebreaks }}
 <section>
+	<aside>
+		<ol class="dates">
+			{% for month in date_list %}
+			<li>
+				<a href="{% url month blog.slug month|date:"Y" month|date:"m" %}">{{ month|date:"N" }}</a>
+			</li>
+			{% endfor %}
+		</ol>
+	</aside>
 	<h2>Posts for {{ year }}</h2>
 	<ul>
 		{% for post in object_list %}
@@ -19,17 +28,10 @@
 		</li>
 		{% endfor %}
 	</ul>
-	<nav>
-		<ol>
-			{% for month in date_list %}
-			<li>
-				<a href="{% url month blog.slug month|date:"Y" month|date:"m" %}">{{ month|date:"N" }}</a>
-			</li>
-			{% endfor %}
-		</ol>
-	</nav>
 </section>
-<a href="{{ blog.get_absolute_url }}">Back to post list</a>
+<nav>
+	<a href="{{ blog.get_absolute_url }}">Back to post list</a>
+</nav>
 {% endblock %}
 
 {% block footer %}

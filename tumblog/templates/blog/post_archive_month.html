@@ -4,11 +4,25 @@
 
 {% block header %}
 <h1>{{ blog.name }}</h1>
+{{ blog.description|linebreaks }}
 {% endblock %}
 
 {% block main %}
-{{ blog.description|linebreaks }}
 <section>
+	<aside>
+		<ol class="dates">
+			<li>
+				<a href="{% url month blog.slug previous_month|date:"Y" previous_month|date:"m" %}">
+					{{ previous_month|date:"N" }}</a>
+			</li>
+			{% if next_month %}
+			<li>
+				<a href="{% url month blog.slug next_month|date:"Y" next_month|date:"m" %}">
+					{{ next_month|date:"N" }}</a>
+			</li>
+			{% endif %}
+		</ol>
+	</aside>
 	<h2>Posts for {{ month|date:"N, Y" }}</h2>
 	<ul>
 		{% for post in object_list %}
@@ -19,16 +33,10 @@
 		</li>
 		{% endfor %}
 	</ul>
-	<nav>
-		<a href="{% url month blog.slug previous_month|date:"Y" previous_month|date:"m" %}">
-			{{ previous_month|date:"N" }}</a>
-		{% if next_month %}
-		<a href="{% url month blog.slug next_month|date:"Y" next_month|date:"m" %}">
-			{{ next_month|date:"N" }}</a>
-		{% endif %}
-	</nav>
 </section>
-<a href="{{ blog.get_absolute_url }}">Back to post list</a>
+<nav>
+	<a href="{{ blog.get_absolute_url }}">Back to post list</a>
+</nav>
 {% endblock %}
 
 {% block footer %}

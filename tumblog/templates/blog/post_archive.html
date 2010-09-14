@@ -4,14 +4,23 @@
 
 {% block header %}
 <h1>{{ blog.name }}</h1>
+{{ blog.description|linebreaks }}
 {% endblock %}
 
 {% block main %}
-{{ blog.description|linebreaks }}
 <section>
-	<h2>Recent Posts</h2>
 	{% if latest|length %}
-	<p>Showing {{ latest|length }} posts of {{ blog.posts.get_visible|length }} total.</p>
+	<aside>
+		<ol class="dates">
+		{% for year in date_list %}
+			<li>
+				<a href="{% url year blog.slug year|date:"Y" %}">
+					{{ year|date:"Y" }}</a>
+			</li>
+		{% endfor %}
+		</ol>
+	</aside>
+	<h2>Recent Posts</h2>
 	<ul>
 		{% for post in latest %}
 		<li>
@@ -21,18 +30,13 @@
 		</li>
 		{% endfor %}
 	</ul>
-	<nav>
-		<ol>
-			{% for year in date_list %}
-				<li><a href="{% url year blog.slug year|date:"Y" %}">{{ year|date:"Y" }}</a></li>
-			{% endfor %}
-		</ol>
-	</nav>
 	{% else %}
 	<p>Sorry, no posts yet. Check back soon.</p>
 	{% endif %}
 </section>
-<a href="{% url home %}">Back to blog list</a>
+<nav>
+	<a href="{% url home %}">Back to blog list</a>
+</nav>
 {% endblock %}
 
 {% block footer %}
