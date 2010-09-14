@@ -110,6 +110,12 @@ header {
     margin-top:10px;
     text-align:center;
   }
+  #main #comments dd {
+    margin-bottom:10px
+  }
+  #main section {
+    margin-bottom:10px;
+  }
 
 footer {
   font-size:10px;

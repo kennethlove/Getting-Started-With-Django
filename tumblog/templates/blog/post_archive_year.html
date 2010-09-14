@@ -1,11 +1,6 @@
-{% extends "layouts/site_base.html" %}
+{% extends "blog/base.html" %}
 
-{% block page_title %}{{ blog.name }} | {{ block.super }}{% endblock %}
-
-{% block header %}
-<h1>{{ blog.name }}</h1>
-{{ blog.description|linebreaks }}
-{% endblock %}
+{% block page_title %}{{ year }} | {{ block.super }}{% endblock %}
 
 {% block main %}
 <section>
@@ -32,8 +27,4 @@
 <nav>
 	<a href="{{ blog.get_absolute_url }}">Back to post list</a>
 </nav>
-{% endblock %}
-
-{% block footer %}
-<p>All contents &copy; 2010 {{ blog.user }}</p>
 {% endblock %}

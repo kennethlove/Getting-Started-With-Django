@@ -3,11 +3,13 @@
 {% block page_title %}Pick a blog! | {{ block.super }}{% endblock %}
 
 {% block header %}
-<h1>Select a blog below to view its posts.</h1>
+<h1>Stairs</h1>
+<p>The best microblogging site on the web!</p>
 {% endblock %}
 
 {% block main %}
 {% if object_list %}
+	<h2>Select a blog below to view its posts.</h2>
 	<ul>
 		{% for blog in object_list %}
 		<li>
