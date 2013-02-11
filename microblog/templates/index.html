@@ -2,5 +2,7 @@
 {% load url from future %}
 
 {% block page_content %}
-<a href="{% url 'blog:list' %}">Read my blog</a>
+<div class="row-fluid">
+    <a href="{% url 'blog:list' %}" class="btn">Read my blog</a>
+</div>
 {% endblock %}
