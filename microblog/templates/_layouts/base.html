@@ -1,0 +1,14 @@
+<!doctype html>
+<html>
+    <head>
+        <title>{% block page_title %}{% endblock %}Microblog</title>
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.min.css">
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap-responsive.min.css">
+    </head>
+    <body>
+        <div class="container">
+            <h1>Welcome to my site!</h1>
+            {% block page_content %}{% endblock %}
+        </div>
+    </body>
+</html>
