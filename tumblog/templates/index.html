@@ -1,0 +1,21 @@
+{% extends 'layouts/site_base.html' %}
+
+{% block page_title %}Pick a blog! | {{ block.super }}{% endblock %}
+
+{% block header %}
+<h1>Stairs</h1>
+<p>The best microblogging site on the web!</p>
+{% endblock %}
+
+{% block main %}
+{% if blogs %}
+	<h2>Select a blog below to view its posts.</h2>
+	<ul>
+		{% for blog in blogs %}
+		<li>
+		<a href="{{ blog.get_absolute_url }}">{{ blog }}</a>
+		</li>
+		{% endfor %}
+	</ul>
+{% endif %}
+{% endblock %}

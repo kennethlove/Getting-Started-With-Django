@@ -1,3 +1,4 @@
 *.pyc
-microblog/settings/local.py
+db/
+tut_venv/
 .DS_Store

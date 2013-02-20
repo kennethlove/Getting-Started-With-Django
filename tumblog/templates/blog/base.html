@@ -1,0 +1,14 @@
+{% extends "layouts/site_base.html" %}
+
+{% block page_title %}
+{{ blog.name }} | {{ block.super }}
+{% endblock %}
+
+{% block header %}
+<h1><a href="{{ blog.get_absolute_url }}">{{ blog.name }}</a></h1>
+{{ blog.description|linebreaks }}
+{% endblock %}
+
+{% block footer %}
+<p>All contents &copy; 2010 {{ blog.user }}</p>
+{% endblock %}

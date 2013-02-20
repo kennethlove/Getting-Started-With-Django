@@ -1,0 +1,98 @@
+{% extends "blog/base.html" %}
+{% load comments %}
+
+{% block page_title %}
+{{ object.title }} | 
+{% with object.blog as blog %}
+	{{ block.super }}
+{% endwith %}
+{% endblock %}
+
+{% block header %}
+{% with object.blog as blog %}
+	{{ block.super }}
+{% endwith %}
+{% endblock %}
+
+{% block main %}
+<article>
+	<aside>
+		{{ object.publish_at }}
+		<ul>
+			{% for tag in object.tags.all %}
+			<li>{{ tag }}</li>
+			{% endfor %}
+		</ul>
+	</aside>
+	<section>
+	<h1>{{ object.title }}</h1>
+	{{ object.body|linebreaks }}
+	</section>
+	<section id="comments">
+	<h2>Comments</h2>
+	{% get_comment_list for object as comments %}
+	{% if comments %}
+	<dl>
+		{% for comment in comments %}
+		<dt>
+			{% if comment.user_url %}
+			<a href="{{ comment.user_url }}" rel="nofollow">
+				{{ comment.user_name }}
+			</a>
+			{% else %}
+				{{ comment.user_name }}
+			{% endif %}
+			<a href="{% get_comment_permalink comment "#c%(id)s-by-%(user_name)s" %}">
+				{{ comment.submit_date }}
+			</a>
+		</dt>
+		<dd>{{ comment.comment|linebreaks }}</dd>
+		{% endfor %}
+	</dl>
+	{% else %}
+	<p>No comments yet. Leave the first one below!</p>
+	{% endif %}
+	</section>
+
+	<section id="comment_form">
+	<h2>Leave a comment!</h2>
+	{% get_comment_form for object as comment_form %}
+		<form action="{% comment_form_target %}" method="post">
+			{{ comment_form.as_p }}
+			{% csrf_token %}
+			<p><input type="submit" name="preview" class="submit-post" value="Preview"></p>
+			<input type="hidden" name="next" value="{{ object.get_absolute_url }}">
+		</form>
+	</section>
+</article>
+<nav>
+	{% with object.get_previous_by_publish_at as prev %}
+		{% if prev and prev.is_visible %}
+		<a href="{{ prev.get_absolute_url }}">
+			&lt; {{ prev }}</a>
+		{% endif %}
+	{% endwith %}
+	<a href="{{ object.blog.get_absolute_url }}">Back to post 
+		list</a>
+	{% with object.get_next_by_publish_at as next %}
+		{% if next and next.is_visible %}
+		<a href="{{ next.get_absolute_url }}">
+			{{ next }} &gt;</a>
+		{% endif %}
+	{% endwith %}
+</nav>
+{% endblock %}
+
+{% block footer %}
+{% with object.blog as blog %}
+{{ block.super }}
+{% endwith %}
+{% endblock %}
+
+{% block scripts %}
+<script>
+$(function() {
+	$('input#id_honeypot').hide().prev('label').hide();
+});
+</script>
+{% endblock %}

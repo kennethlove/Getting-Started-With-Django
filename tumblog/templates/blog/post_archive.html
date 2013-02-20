@@ -1,0 +1,33 @@
+{% extends "blog/base.html" %}
+
+{% block main %}
+<section>
+	{% if latest|length %}
+	<aside>
+		<ol class="dates">
+		{% for year in date_list %}
+			<li>
+				<a href="{% url year blog.slug year|date:"Y" %}">
+					{{ year|date:"Y" }}</a>
+			</li>
+		{% endfor %}
+		</ol>
+	</aside>
+	<h2>Recent Posts</h2>
+	<ul>
+		{% for post in latest %}
+		<li>
+			<h3><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
+			{{ post.publish_at|date }}
+			{{ post.excerpt|linebreaks }}
+		</li>
+		{% endfor %}
+	</ul>
+	{% else %}
+	<p>Sorry, no posts yet. Check back soon.</p>
+	{% endif %}
+</section>
+<nav>
+	<a href="{% url home %}">Back to blog list</a>
+</nav>
+{% endblock %}

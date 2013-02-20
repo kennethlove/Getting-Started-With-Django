@@ -1,0 +1,30 @@
+{% extends "blog/base.html" %}
+
+{% block page_title %}{{ year }} | {{ block.super }}{% endblock %}
+
+{% block main %}
+<section>
+	<aside>
+		<ol class="dates">
+			{% for month in date_list %}
+			<li>
+				<a href="{% url month blog.slug month|date:"Y" month|date:"m" %}">{{ month|date:"N" }}</a>
+			</li>
+			{% endfor %}
+		</ol>
+	</aside>
+	<h2>Posts for {{ year }}</h2>
+	<ul>
+		{% for post in object_list %}
+		<li>
+			<h3><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
+			{{ post.publish_at|date }}
+			{{ post.excerpt|linebreaks }}
+		</li>
+		{% endfor %}
+	</ul>
+</section>
+<nav>
+	<a href="{{ blog.get_absolute_url }}">Back to post list</a>
+</nav>
+{% endblock %}
